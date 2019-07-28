@@ -11,7 +11,7 @@ exports.up = function(knex) {
       .onDelete("CASCADE")
       .onUpdate("CASCADE");
     issues
-      .integer("zip code")
+      .integer("zipCode")
       .notNullable()
       .comment("This is the location field");
     issues.string("issue_name", 128).notNullable();

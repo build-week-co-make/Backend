@@ -1,15 +1,22 @@
 const express = require("express");
-// const mainRouter = require("../routers/mainRouter"); //import routers
+const helmet = require("helmet");
+const authRouter = require("../auth/auth-router");
+const usersRouter = require("../routers/users-router");
+const issuesRouter = require("../routers/issues-router");
+
 const server = express();
 const cors = require("cors");
 
-server.use(express.json());
 server.use(cors());
+server.use(helmet());
+server.use(express.json());
 
 server.get("/", (req, res) => {
   res.send("Welcome to Co-Make!");
 });
 
-// server.use("/api", mainRouter); list of routes
+server.use("/auth", authRouter);
+server.use("/users", usersRouter);
+server.use("/issues", issuesRouter);
 
 module.exports = server;

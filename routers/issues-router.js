@@ -1,9 +1,8 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 
-const Users = require("./mainHelpers");
+const Users = require("./users-model");
 const restricted = require("../middleware/restricted");
-const validateUserInfo = require("../middleware/validate-user");
 
 const router = express.Router();
 

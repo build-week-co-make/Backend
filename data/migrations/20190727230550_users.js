@@ -10,7 +10,7 @@ exports.up = function(knex) {
       .comment("This is the email field");
     users.string("password", 128).notNullable();
     users
-      .integer("zip code")
+      .integer("zipCode")
       .notNullable()
       .comment("This is the location field");
   });

@@ -1,9 +1,8 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 
-const Users = require("./mainHelpers");
+const Users = require("./users-model");
 const restricted = require("../middleware/restricted");
-const validateUserInfo = require("../middleware/validate-user");
 
 const router = express.Router();
 
@@ -42,6 +41,20 @@ router.get("/:id/issues", restricted, (req, res) => {
     })
     .catch(err => res.send(err));
 });
+
+//UPDATE user
+
+// router.put("/:id/update", restricted, checkRoles("Admin"), (req, res) => {
+//   Users.update(req.params.id, req.body)
+//     .then(user => {
+//       res.status(200).json(user);
+//     })
+//     .catch(error => {
+//       res
+//         .status(500)
+//         .json({ message: "We ran into an error updating the user" });
+//     });
+// });
 
 //DELETE a user
 
