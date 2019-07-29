@@ -6,6 +6,18 @@ const restricted = require("../middleware/restricted");
 
 const router = express.Router();
 
+//GET all users for Co-Make
+
+router.get("/", restricted, (req, res) => {
+  console.log("req.jwtToken", req.jwtToken);
+
+  Users.find()
+    .then(users => {
+      res.json(users);
+    })
+    .catch(err => res.send(err));
+});
+
 //GET request users profile
 
 router.get("/:id", restricted, (req, res) => {
