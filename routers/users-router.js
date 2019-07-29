@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 
 const Users = require("./users-model");
 const restricted = require("../middleware/restricted");
+const validateUserUpdate = require("../middleware/validate-update");
 
 const router = express.Router();
 
@@ -20,26 +21,36 @@ router.get("/", restricted, (req, res) => {
 
 //GET request users profile
 
-router.get("/:id", restricted, (req, res) => {
+router.get("/:id", restricted, async (req, res) => {
   console.log("req.jwtToken", req.jwtToken);
-
-  Users.find()
-    .then(users => {
-      res.json(users);
-    })
-    .catch(err => res.send(err));
+  const { id } = req.params;
+  try {
+    const getUser = await Users.findById(id);
+    if (getUser) {
+      res.status(200).json(getUser);
+    } else {
+      res.status(404).json({ message: "wrong user info" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "We ran into an error retrieving the user" });
+  }
 });
 
 //GET request  list of issues created by this user
 
 router.get("/:id/my-issues", restricted, (req, res) => {
   console.log("req.jwtToken", req.jwtToken);
-
-  Users.find()
-    .then(users => {
-      res.json(users);
-    })
-    .catch(err => res.send(err));
+  const { id } = req.params.id;
+  try {
+    Users.findById(id).then(user => {
+      res.json(user);
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "We ran into an error retrieving the user" });
+  }
 });
 
 //GET request for main feed of logged in users' issues
@@ -56,35 +67,37 @@ router.get("/:id/issues", restricted, (req, res) => {
 
 //UPDATE user
 
-// router.put("/:id/update", restricted, checkRoles("Admin"), (req, res) => {
-//   Users.update(req.params.id, req.body)
-//     .then(user => {
-//       res.status(200).json(user);
-//     })
-//     .catch(error => {
-//       res
-//         .status(500)
-//         .json({ message: "We ran into an error updating the user" });
-//     });
-// });
+router.put("/:id", restricted, validateUserUpdate, (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+
+  Users.update(id, req.body)
+    .then(user => {
+      res.status(200).json(user);
+    })
+    .catch(error => {
+      res
+        .status(500)
+        .json({ message: "We ran into an error updating the user" });
+    });
+});
 
 //DELETE a user
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", restricted, async (req, res) => {
   const id = req.params.id;
   try {
-    const deleteProject = await ProjectDb.remove(id);
-    console.log(deleteProject);
-
-    if (deleteProject > 0) {
-      res.status(200).json({ message: "The project has been deleted" });
+    const deleteUser = await Users.remove(id);
+    console.log(deleteUser);
+    if (deleteUser > 0) {
+      res.status(200).json({ message: "The User has been deleted" });
     } else {
       res
         .status(404)
-        .json({ message: "Unable to delete the project with that id" });
+        .json({ message: "Unable to delete the User with that id" });
     }
   } catch (error) {
-    res.status(500).json({ error: "Error trying to delete project" });
+    res.status(500).json({ error: "Error trying to delete User" });
   }
 });
 
