@@ -18,6 +18,8 @@ exports.up = function(knex) {
       .inTable("issues")
       .onDelete("CASCADE")
       .onUpdate("CASCADE");
+
+    upvote.unique(["user_id", "issue_id"]);
   });
 };
 

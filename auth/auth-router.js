@@ -29,7 +29,7 @@ router.post("/login", validateLoginInfo, (req, res) => {
     .first()
     .then(user => {
       if (user && bcrypt.compareSync(password, user.password)) {
-        const token = generateToken(user.email);
+        const token = generateToken(user);
         res.status(200).json({
           message: `Welcome ${user.username || user.email}!`,
           token,
@@ -47,15 +47,17 @@ router.post("/login", validateLoginInfo, (req, res) => {
 });
 
 function generateToken(user) {
+  console.log("secret.jwtsecret:", secret.jwtSecret);
+
   const jwtPayload = {
     subject: user.id,
     email: user.email
   };
-  const jwtSecret = process.env.JWT_SECRET;
+  // const jwtSecret = process.env.JWT_SECRET;
   const jwtOptions = {
     expiresIn: "1d"
   };
-  return jwt.sign(jwtPayload, jwtSecret, jwtOptions);
+  return jwt.sign(jwtPayload, secret.jwtSecret, jwtOptions);
 }
 
 module.exports = router;
