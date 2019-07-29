@@ -5,6 +5,8 @@ module.exports = {
   find,
   findBy,
   findById,
+  getCommentsByIssueId,
+  getIssueWithComments,
   remove,
   update
 };
@@ -32,14 +34,18 @@ function findById(id) {
     .first();
 }
 
+function getCommentsByIssueId(id) {
+  return db("comments").where({ issue_id: id });
+}
+
 function remove(id) {
-  return db("users")
+  return db("issues")
     .where({ id })
     .del();
 }
 
 function update(id, changes) {
-  return db("users")
+  return db("issues")
     .where({ id })
     .update(changes)
     .then(count => {
@@ -51,13 +57,13 @@ function update(id, changes) {
     });
 }
 
-//get issue with comments attatched
-// async function getProjectWithActions(id) {
-//     let project = await getProjectById(id);
-//     let actions = await getActionsByProjId(id);
-//     if (project) {
-//       return { ...project, actions };
-//     } else {
-//       return null;
-//     }
-//   }
+// get issue with comments attatched
+async function getIssueWithComments(id) {
+  let issue = await findById(id);
+  let comments = await getCommentsByIssueId(id);
+  if (issue) {
+    return { ...issue, comments };
+  } else {
+    return null;
+  }
+}
