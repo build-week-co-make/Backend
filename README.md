@@ -7,7 +7,10 @@ The Site where you can keep create and support local issues that are affecting y
 ### Some of the features include:
 
 -Ability to see the things that are affecting your local environment
-//add more
+-Users can add issues in their local areas for their community to see and discuss
+-Users can upvote the issues they think deserve priority
+-A user can delete issues they have posted previously.
+-A user can comment on their own issue post or the issues of others to foster discussion.
 
 ## View current deployment of this site
 
@@ -15,10 +18,11 @@ The Site where you can keep create and support local issues that are affecting y
 
 ## MVP Goals for Back End Architect
 
-- [ ] list features
-- [ ] App must have a page that lists out a users top 9 friends.
-- [ ] The user should have the ability to add, delete, and update friends from their list.
-- [ ] App must be hosted on a hosting platform like "Netlify" or "Github Pages".
+- [ ] create a database with tables that account for users, comments, and issues.
+- [ ] The user should have the ability to add, delete, and update issues from their posts.
+- [ ] The user should have the ability to add, delete, and update comments on their posts and others as well.
+- [ ] The user should have the ability to upvote comments or issues that are posted.
+- [ ] Issues should be sortable by highest amount of upvotes as well as their classification as a volunteer opportunity.
 
 ## Set Up The Project With Git
 
