@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 
 const Issues = require("./issues-model");
 const restricted = require("../middleware/restricted");
+const validateIssue = require("../middleware/validate-issue");
 
 const router = express.Router();
 
@@ -96,23 +97,21 @@ router.get("/:id/withComments", async (req, res) => {
 
 //ADD an Issue
 
-router.post("/", restricted, async (req, res) => {
+router.post("/", restricted, validateIssue, async (req, res) => {
   console.log("req.jwtToken", req.jwtToken);
   const issue = req.body;
   try {
     const newIssue = await Issues.add(issue);
-
     res.status(201).json(newIssue);
   } catch (error) {
     console.log(error);
-
     res.status(500).json(error);
   }
 });
 
 //UPDATE an issue
 
-router.put("/:id", restricted, (req, res) => {
+router.put("/:id", restricted, validateIssue, (req, res) => {
   const id = req.params.id;
   console.log(id);
 

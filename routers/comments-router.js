@@ -36,4 +36,20 @@ router.get("/:id", restricted, async (req, res) => {
   }
 });
 
+//UPDATE a comment
+
+router.put("/:id", restricted, (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+
+  Comments.update(id, req.body)
+    .then(comment => {
+      res.status(200).json(comment);
+    })
+    .catch(error => {
+      res
+        .status(500)
+        .json({ message: "We ran into an error updating the comment" });
+    });
+});
 module.exports = router;
