@@ -14,13 +14,13 @@ exports.up = function(knex) {
       .integer("zipCode")
       .notNullable()
       .comment("This is the location field");
-    issues.string("issue_name", 128).notNullable();
+    issues.string("issue_name", 999).notNullable();
     issues.text("description").notNullable();
-    issues.string("category", 128).notNullable();
+    issues.string("category", 999).notNullable();
     issues.boolean("volunteer").defaultTo(false);
     issues.boolean("completed").defaultTo(false);
     issues.boolean("open_for_voting").defaultTo(true);
-    issues.string("picture", 256);
+    issues.string("picture", 999);
   });
 };
 
