@@ -17,7 +17,7 @@ router.get("/", restricted, (req, res) => {
     .catch(err => res.send(err));
 });
 
-//GET request for issue by id
+//GET issue by id
 
 router.get("/:id", restricted, async (req, res) => {
   const id = req.params.id;
@@ -32,6 +32,26 @@ router.get("/:id", restricted, async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "We ran into an error retrieving the user" });
+  }
+});
+
+//GET issue by User id
+
+router.get("/:id/user/issues", restricted, async (req, res) => {
+  const id = req.params.id;
+  console.log("req.jwtToken", req.jwtToken);
+  try {
+    const getIssues = await Issues.getIssuesByUserId(id);
+    if (getIssues) {
+      res.status(200).json(getIssues);
+    } else {
+      res.status(404).json({ message: "wrong user id" });
+    }
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({ error: "We ran into an error retrieving the issues" });
   }
 });
 

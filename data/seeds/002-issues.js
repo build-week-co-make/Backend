@@ -30,24 +30,50 @@ exports.seed = function(knex) {
         },
         {
           user_id: 3,
-          issue_name: "pot hole",
-          description: "use migrations and create a database",
+          issue_name: "Stop sign fell over",
+          description:
+            "The storm knocked the sign over on the corner of 10th ave and Main street. Will need an hour and 3 volunteers",
           location: 94107,
+          category: "roadwork",
+          volunteer: true
+        },
+        {
+          user_id: 5,
+          issue_name: "Mural was vandalized",
+          description: "Need to paint over the grafiti on the mural.",
+          location: 94501,
+          category: "repair"
+        },
+        {
+          user_id: 5,
+          issue_name: "Security system needed at local shop",
+          description:
+            "3 break ins this month, need to put together money and time to install new cameras and alarm system",
+          location: 94501,
+          category: "electric"
+        },
+        {
+          user_id: 4,
+          issue_name: "lines in the road have faded away",
+          description: "need to repaint the lines in the middle of the road",
+          location: 94501,
+          category: "roadwork"
+        },
+        {
+          user_id: 4,
+          issue_name: "Storm washed rocks into the road",
+          description:
+            "dozens of large rocks are covering the orad and sidewalk, dangerous to drive through",
+          location: 94501,
           category: "environment"
         },
         {
-          user_id: 1,
-          issue_name: "pot hole",
-          description: "use migrations and create a database",
+          user_id: 6,
+          issue_name: "town common needs landscaping",
+          description:
+            "park for children is overgrown with weeds and bushes, needs landscaping done",
           location: 94107,
-          category: "environment"
-        },
-        {
-          user_id: 1,
-          issue_name: "pot hole",
-          description: "use migrations and create a database",
-          location: 94107,
-          category: "environment"
+          category: "landscaping"
         }
       ]);
     });

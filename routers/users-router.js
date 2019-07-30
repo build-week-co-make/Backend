@@ -39,11 +39,11 @@ router.get("/:id", restricted, async (req, res) => {
 
 //GET request  list of issues created by this user
 
-router.get("/:id/my-issues", restricted, (req, res) => {
+router.get("/:id/issues", restricted, (req, res) => {
   console.log("req.jwtToken", req.jwtToken);
-  const { id } = req.params.id;
+  const id = req.params.id;
   try {
-    Users.findById(id).then(user => {
+    Users.getUserWithIssues(id).then(user => {
       res.json(user);
     });
   } catch (error) {
@@ -51,18 +51,6 @@ router.get("/:id/my-issues", restricted, (req, res) => {
       .status(500)
       .json({ message: "We ran into an error retrieving the user" });
   }
-});
-
-//GET request for main feed of logged in users' issues
-
-router.get("/:id/issues", restricted, (req, res) => {
-  console.log("req.jwtToken", req.jwtToken);
-
-  Users.find()
-    .then(users => {
-      res.json(users);
-    })
-    .catch(err => res.send(err));
 });
 
 //UPDATE user
