@@ -80,7 +80,8 @@ router.post("/", restricted, async (req, res) => {
   console.log("req.jwtToken", req.jwtToken);
   const issue = req.body;
   try {
-    const newIssue = Issues.add(issue);
+    const newIssue = await Issues.add(issue);
+
     res.status(201).json(newIssue);
   } catch (error) {
     console.log(error);
