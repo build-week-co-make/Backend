@@ -52,4 +52,23 @@ router.put("/:id", restricted, (req, res) => {
         .json({ message: "We ran into an error updating the comment" });
     });
 });
+
+//DELETE an issue
+
+router.delete("/:id", restricted, async (req, res) => {
+  const id = req.params.id;
+  try {
+    const deleteComment = await Comments.remove(id);
+    console.log(deleteComment);
+    if (deleteComment > 0) {
+      res.status(200).json({ message: "The Comment has been deleted" });
+    } else {
+      res
+        .status(404)
+        .json({ message: "Unable to delete the Comment with that id" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Error trying to delete Comment" });
+  }
+});
 module.exports = router;
