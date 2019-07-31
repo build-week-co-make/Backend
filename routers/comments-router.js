@@ -7,6 +7,7 @@ const validateComment = require("../middleware/validate-comment");
 
 const router = express.Router();
 
+//ADD a comment
 router.post("/", restricted, validateComment, async (req, res) => {
   const commentInfo = req.body;
   try {
@@ -18,6 +19,8 @@ router.post("/", restricted, validateComment, async (req, res) => {
     res.status(500).json(error);
   }
 });
+
+//GET comment by ID
 
 router.get("/:id", restricted, async (req, res) => {
   const id = req.params.id;
@@ -54,7 +57,7 @@ router.put("/:id", restricted, validateComment, (req, res) => {
     });
 });
 
-//DELETE an issue
+//DELETE an comment
 
 router.delete("/:id", restricted, async (req, res) => {
   const id = req.params.id;

@@ -3,15 +3,20 @@ const db = require("../data/db-config");
 module.exports = {
   upvoteIssue,
   upvoteComment,
-  find,
+  findIssueUpvotes,
+  findCommentUpvotes,
   issueVoteById,
   commentVoteById,
   removeIssueUpvote,
   removeCommentUpvote
 };
 
-function find() {
-  return db("comments");
+function findIssueUpvotes() {
+  return db("issueUpvotes");
+}
+
+function findCommentUpvotes() {
+  return db("commentUpvotes");
 }
 
 //Add an upvote to an issue
@@ -35,15 +40,11 @@ function upvoteComment(upvote) {
 }
 
 function issueVoteById(id) {
-  return db("issueUpvotes")
-    .where({ id })
-    .first();
+  return db("issueUpvotes").where({ issue_id: id });
 }
 
 function commentVoteById(id) {
-  return db("commentUpvotes")
-    .where({ id })
-    .first();
+  return db("commentUpvotes").where({ comment_id: id });
 }
 
 function removeIssueUpvote(id) {

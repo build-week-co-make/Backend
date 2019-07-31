@@ -76,6 +76,8 @@ router.get("/:id/comments", restricted, async (req, res) => {
   }
 });
 
+//GET issue object with comments array attached
+
 router.get("/:id/withComments", async (req, res) => {
   const id = req.params.id;
 
