@@ -3,10 +3,11 @@ const bcrypt = require("bcryptjs");
 
 const Comments = require("./comments-model");
 const restricted = require("../middleware/restricted");
+const validateComment = require("../middleware/validate-comment");
 
 const router = express.Router();
 
-router.post("/", restricted, async (req, res) => {
+router.post("/", restricted, validateComment, async (req, res) => {
   const commentInfo = req.body;
   try {
     const addComment = await Comments.add(commentInfo);
@@ -38,7 +39,7 @@ router.get("/:id", restricted, async (req, res) => {
 
 //UPDATE a comment
 
-router.put("/:id", restricted, (req, res) => {
+router.put("/:id", restricted, validateComment, (req, res) => {
   const id = req.params.id;
   console.log(id);
 

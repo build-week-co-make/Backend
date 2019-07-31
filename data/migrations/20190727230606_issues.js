@@ -16,7 +16,7 @@ exports.up = function(knex) {
       .comment("This is the location field");
     issues.string("issue_name", 999).notNullable();
     issues.text("description").notNullable();
-    issues.string("category", 999).notNullable();
+    issues.string("category", 999);
     issues.boolean("volunteer").defaultTo(false);
     issues.boolean("completed").defaultTo(false);
     issues.boolean("open_for_voting").defaultTo(true);
