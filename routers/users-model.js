@@ -5,6 +5,9 @@ module.exports = {
   find,
   findBy,
   findById,
+  findCommentById,
+  getIssuesByUserId,
+  getUserWithIssues,
   remove,
   update
 };
@@ -32,6 +35,16 @@ function findById(id) {
     .first();
 }
 
+function findCommentById(id) {
+  return db("comments")
+    .where({ id })
+    .first();
+}
+
+function getIssuesByUserId(id) {
+  return db("issues").where({ user_id: id });
+}
+
 function remove(id) {
   return db("users")
     .where({ id })
@@ -49,4 +62,15 @@ function update(id, changes) {
         return null;
       }
     });
+}
+
+// get user with issues attatched
+async function getUserWithIssues(id) {
+  let user = await findById(id);
+  let issues = await getIssuesByUserId(id);
+  if (user) {
+    return { ...user, issues };
+  } else {
+    return null;
+  }
 }

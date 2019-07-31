@@ -13,6 +13,7 @@ exports.up = function(knex) {
       .integer("zipCode")
       .notNullable()
       .comment("This is the location field");
+    users.string("picture", 256);
   });
 };
 

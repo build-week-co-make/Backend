@@ -43,3 +43,5 @@ The Site where you can keep create and support local issues that are affecting y
 ## Deploy on Netlify
 
 - [ ] After you have created your own version, visit [netlify](https://www.netlify.com/) and link your GitHub account. Once it is linked, use netlify to deploy your version of the site.
+
+heroku restart -a co-make && npx heroku pg:reset DATABASE --confirm co-make -a co-make && npx heroku run knex migrate:latest -a co-make

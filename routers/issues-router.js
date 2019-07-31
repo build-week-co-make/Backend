@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 
 const Issues = require("./issues-model");
 const restricted = require("../middleware/restricted");
+const validateIssue = require("../middleware/validate-issue");
 
 const router = express.Router();
 
@@ -17,7 +18,7 @@ router.get("/", restricted, (req, res) => {
     .catch(err => res.send(err));
 });
 
-//GET request for issue by id
+//GET issue by id
 
 router.get("/:id", restricted, async (req, res) => {
   const id = req.params.id;
@@ -32,6 +33,26 @@ router.get("/:id", restricted, async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "We ran into an error retrieving the user" });
+  }
+});
+
+//GET issue by User id
+
+router.get("/:id/user/issues", restricted, async (req, res) => {
+  const id = req.params.id;
+  console.log("req.jwtToken", req.jwtToken);
+  try {
+    const getIssues = await Issues.getIssuesByUserId(id);
+    if (getIssues) {
+      res.status(200).json(getIssues);
+    } else {
+      res.status(404).json({ message: "wrong user id" });
+    }
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({ error: "We ran into an error retrieving the issues" });
   }
 });
 
@@ -76,22 +97,21 @@ router.get("/:id/withComments", async (req, res) => {
 
 //ADD an Issue
 
-router.post("/", restricted, async (req, res) => {
+router.post("/", restricted, validateIssue, async (req, res) => {
   console.log("req.jwtToken", req.jwtToken);
   const issue = req.body;
   try {
-    const newIssue = Issues.add(issue);
+    const newIssue = await Issues.add(issue);
     res.status(201).json(newIssue);
   } catch (error) {
     console.log(error);
-
     res.status(500).json(error);
   }
 });
 
 //UPDATE an issue
 
-router.put("/:id", restricted, (req, res) => {
+router.put("/:id", restricted, validateIssue, (req, res) => {
   const id = req.params.id;
   console.log(id);
 
