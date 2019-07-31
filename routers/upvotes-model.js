@@ -6,7 +6,8 @@ module.exports = {
   find,
   issueVoteById,
   commentVoteById,
-  remove
+  removeIssueUpvote,
+  removeCommentUpvote
 };
 
 function find() {
@@ -45,7 +46,13 @@ function commentVoteById(id) {
     .first();
 }
 
-function remove(id) {
+function removeIssueUpvote(id) {
+  return db("comments")
+    .where({ id })
+    .del();
+}
+
+function removeCommentUpvote(id) {
   return db("comments")
     .where({ id })
     .del();

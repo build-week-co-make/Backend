@@ -36,7 +36,7 @@ router.post("/comment", restricted, validateCommentUpvote, async (req, res) => {
 
 //DELETE upvote on issue
 
-router.delete("/:id", restricted, async (req, res) => {
+router.delete("/:id/issue", restricted, async (req, res) => {
   const id = req.params.id;
   try {
     const deleteUpvote = await Upvotes.removeIssueUpvote(id);
@@ -55,7 +55,7 @@ router.delete("/:id", restricted, async (req, res) => {
 
 //DELETE upvote on comment
 
-router.delete("/:id", restricted, async (req, res) => {
+router.delete("/:id/comment", restricted, async (req, res) => {
   const id = req.params.id;
   try {
     const deleteUpvote = await Upvotes.removeCommentUpvote(id);
