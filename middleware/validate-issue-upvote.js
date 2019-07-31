@@ -1,6 +1,6 @@
-module.exports = validateUpvote;
+module.exports = validateIssueUpvote;
 
-function validateUpvote(req, res, next) {
+function validateIssueUpvote(req, res, next) {
   const upvoteInfo = req.body;
   console.log("time to validate the upvote info", upvoteInfo);
   if (!upvoteInfo.user_id || !upvoteInfo.issue_id) {

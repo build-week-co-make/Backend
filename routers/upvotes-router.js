@@ -2,13 +2,14 @@ const express = require("express");
 
 const Upvotes = require("./upvotes-model");
 const restricted = require("../middleware/restricted");
-const validateUpvote = require("../middleware/validate-upvote");
+const validateIssueUpvote = require("../middleware/validate-issue-upvote");
+const validateCommentUpvote = require("../middleware/validate-comment-upvote");
 
 const router = express.Router();
 
 //Post and upvote to an Issue
 
-router.post("/issue", restricted, validateUpvote, async (req, res) => {
+router.post("/issue", restricted, validateIssueUpvote, async (req, res) => {
   console.log("req.jwtToken", req.jwtToken);
   const vote = req.body;
   try {
@@ -21,7 +22,7 @@ router.post("/issue", restricted, validateUpvote, async (req, res) => {
 });
 
 //Post and upvote to a comment
-router.post("/comment", restricted, validateUpvote, async (req, res) => {
+router.post("/comment", restricted, validateCommentUpvote, async (req, res) => {
   console.log("req.jwtToken", req.jwtToken);
   const vote = req.body;
   try {
