@@ -104,6 +104,7 @@ router.post("/", restricted, validateIssue, async (req, res) => {
   const issue = req.body;
   try {
     const newIssue = await Issues.add(issue);
+    axios;
     res.status(201).json(newIssue);
   } catch (error) {
     console.log(error);

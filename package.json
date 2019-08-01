@@ -11,6 +11,8 @@
   "author": "Derek S <dschwan21@me.com>",
   "license": "MIT",
   "devDependencies": {
+    "cross-env": "^5.2.0",
+    "jest": "^24.8.0",
     "nodemon": "^1.19.1",
     "supertest": "^4.0.2"
   },

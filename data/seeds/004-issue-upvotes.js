@@ -1,0 +1,94 @@
+exports.seed = function(knex) {
+  // Deletes ALL existing entries
+  return knex("table_name")
+    .del()
+    .then(function() {
+      // Inserts seed entries
+      return knex("table_name").insert([
+        {
+          user_id: 1,
+          issue_id: 3
+        },
+        {
+          user_id: 2,
+          issue_id: 3
+        },
+        {
+          user_id: 3,
+          issue_id: 3
+        },
+        {
+          user_id: 4,
+          issue_id: 3
+        },
+        {
+          user_id: 5,
+          issue_id: 3
+        },
+        {
+          user_id: 1,
+          issue_id: 4
+        },
+        {
+          user_id: 4,
+          issue_id: 4
+        },
+        {
+          user_id: 9,
+          issue_id: 1
+        },
+        {
+          user_id: 8,
+          issue_id: 1
+        },
+        {
+          user_id: 7,
+          issue_id: 1
+        },
+        {
+          user_id: 6,
+          issue_id: 1
+        },
+        {
+          user_id: 1,
+          issue_id: 2
+        },
+        {
+          user_id: 1,
+          issue_id: 5
+        },
+        {
+          user_id: 7,
+          issue_id: 4
+        },
+        {
+          user_id: 6,
+          issue_id: 4
+        },
+        {
+          user_id: 3,
+          issue_id: 4
+        },
+        {
+          user_id: 1,
+          issue_id: 4
+        },
+        {
+          user_id: 6,
+          issue_id: 5
+        },
+        {
+          user_id: 8,
+          issue_id: 5
+        },
+        {
+          user_id: 7,
+          issue_id: 5
+        },
+        {
+          user_id: 9,
+          issue_id: 5
+        }
+      ]);
+    });
+};
