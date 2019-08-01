@@ -23,7 +23,7 @@ router.get("/issue/:id", restricted, (req, res) => {
   console.log("req.jwtToken", req.jwtToken);
   Upvotes.issueVoteById(id)
     .then(votes => {
-      res.json({ upvotes: votes.length, issue_id: parseInt(id) });
+      res.json({ votes, upvotes: votes.length });
     })
     .catch(err => res.send(err));
 });
