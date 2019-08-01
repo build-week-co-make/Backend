@@ -41,7 +41,9 @@ function upvoteComment(upvote) {
 }
 
 function findVoteById(id) {
-  return db("issueUpvotes").where({ id });
+  return db("issueUpvotes")
+    .where({ id })
+    .first();
 }
 
 function issueVoteById(id) {
