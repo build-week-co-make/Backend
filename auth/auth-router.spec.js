@@ -14,7 +14,7 @@ describe("server", () => {
   //     return request(server)
   //       .post("/api/login")
   //       .send({
-  //         email: "bob",
+  //         email: "bob@yahoo.com",
   //         password: "pw"
   //       })
   //       .then(res => {
