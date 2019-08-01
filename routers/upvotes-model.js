@@ -4,6 +4,7 @@ module.exports = {
   upvoteIssue,
   upvoteComment,
   findIssueUpvotes,
+  findVoteById,
   findCommentUpvotes,
   issueVoteById,
   commentVoteById,
@@ -25,7 +26,7 @@ function upvoteIssue(upvote) {
     .insert(upvote, "id")
     .then(ids => {
       const [id] = ids;
-      return issueVoteById(id);
+      return findVoteById(id);
     });
 }
 
@@ -37,6 +38,10 @@ function upvoteComment(upvote) {
       const [id] = ids;
       return commentVoteById(id);
     });
+}
+
+function findVoteById(id) {
+  return db("issueUpvotes").where({ id });
 }
 
 function issueVoteById(id) {

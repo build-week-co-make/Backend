@@ -98,7 +98,7 @@ router.get("/:id/withComments", async (req, res) => {
   }
 });
 
-//ADD an Issue
+//ADD an Issue with model generating category
 
 router.post("/", restricted, validateIssue, async (req, res) => {
   // console.log("req.jwtToken", req.jwtToken);

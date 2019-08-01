@@ -46,6 +46,7 @@ router.post("/issue", restricted, validateIssueUpvote, async (req, res) => {
   const vote = req.body;
   try {
     const upvote = await Upvotes.upvoteIssue(vote);
+    console.log("upvote=", upvote);
     res.status(201).json(upvote);
   } catch (error) {
     console.log(error);
@@ -59,6 +60,8 @@ router.post("/comment", restricted, validateCommentUpvote, async (req, res) => {
   const vote = req.body;
   try {
     const upvote = await Upvotes.upvoteComment(vote);
+    console.log("upvote=", upvote);
+
     res.status(201).json(upvote);
   } catch (error) {
     console.log(error);
