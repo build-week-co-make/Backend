@@ -41,17 +41,13 @@ The Site where you can keep create and support local issues that are affecting y
 
 ## Deploy on Heroku
 
-- [ ]
-
-heroku restart -a co-make && npx heroku pg:reset DATABASE --confirm co-make -a co-make && npx heroku run knex migrate:latest -a co-make
+- [ ] command for resetting your heroku migrations.
+      heroku restart -a co-make && npx heroku pg:reset DATABASE --confirm co-make -a co-make && npx heroku run knex migrate:latest -a co-make
 
 ## Testing
 
 - [ ] Run the command yarn test
 
-## Endpoints
+## Documentation of the API
 
-| First Header     | Second Header  |
-| ---------------- | -------------- |
-| Content cell 1   | Content cell 2 |
-| Content column 1 | Content column |
+https://documenter.getpostman.com/view/7901618/SVYouzdi?version=latest
