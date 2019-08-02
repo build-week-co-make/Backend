@@ -44,3 +44,7 @@ The Site where you can keep create and support local issues that are affecting y
 - [ ]
 
 heroku restart -a co-make && npx heroku pg:reset DATABASE --confirm co-make -a co-make && npx heroku run knex migrate:latest -a co-make
+
+## Testing
+
+- [ ] Run the command yarn test

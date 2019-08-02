@@ -106,7 +106,10 @@ router.post("/", restricted, validateIssue, async (req, res) => {
 
   try {
     const issueWithCategory = await axios
-      .post("https://comakecategorizer.herokuapp.com/api/", issue)
+      .post(
+        "https://comakecategorizer.herokuapp.com/api/",
+        (issue.description, issue.issue_name)
+      )
       .then(res =>
         console.log("retrieved category!", (issue.category = res.data))
       )
