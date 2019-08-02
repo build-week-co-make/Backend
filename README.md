@@ -48,3 +48,10 @@ heroku restart -a co-make && npx heroku pg:reset DATABASE --confirm co-make -a c
 ## Testing
 
 - [ ] Run the command yarn test
+
+## Endpoints
+
+| First Header     | Second Header  |
+| ---------------- | -------------- |
+| Content cell 1   | Content cell 2 |
+| Content column 1 | Content column |
