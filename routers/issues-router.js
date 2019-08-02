@@ -1,5 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
+const axios = require("axios");
 
 const Issues = require("./issues-model");
 const restricted = require("../middleware/restricted");
@@ -76,6 +77,8 @@ router.get("/:id/comments", restricted, async (req, res) => {
   }
 });
 
+//GET issue object with comments array attached
+
 router.get("/:id/withComments", async (req, res) => {
   const id = req.params.id;
 
@@ -95,12 +98,24 @@ router.get("/:id/withComments", async (req, res) => {
   }
 });
 
-//ADD an Issue
+//ADD an Issue with model generating category
 
 router.post("/", restricted, validateIssue, async (req, res) => {
-  console.log("req.jwtToken", req.jwtToken);
+  // console.log("req.jwtToken", req.jwtToken);
   const issue = req.body;
+
   try {
+    const issueWithCategory = await axios
+      .post(
+        "https://comakecategorizer.herokuapp.com/api/",
+        (issue.description, issue.issue_name)
+      )
+      .then(res =>
+        console.log("retrieved category!", (issue.category = res.data))
+      )
+      .catch(err => console.log("FAILED CATEGORY", err));
+    console.log("With new Category", issue);
+
     const newIssue = await Issues.add(issue);
     res.status(201).json(newIssue);
   } catch (error) {

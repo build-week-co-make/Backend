@@ -8,7 +8,7 @@ exports.up = function(knex) {
       .notNullable()
       .unique()
       .comment("This is the email field");
-    users.string("password", 128).notNullable();
+    users.string("password", 999).notNullable();
     users
       .integer("zipCode")
       .notNullable()

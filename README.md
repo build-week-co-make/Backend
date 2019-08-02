@@ -22,7 +22,6 @@ The Site where you can keep create and support local issues that are affecting y
 - [ ] The user should have the ability to add, delete, and update issues from their posts.
 - [ ] The user should have the ability to add, delete, and update comments on their posts and others as well.
 - [ ] The user should have the ability to upvote comments or issues that are posted.
-- [ ] Issues should be sortable by highest amount of upvotes as well as their classification as a volunteer opportunity.
 
 ## Set Up The Project With Git
 
@@ -40,8 +39,15 @@ The Site where you can keep create and support local issues that are affecting y
 
 - [ ] RUN yarn start to fire up your React application.
 
-## Deploy on Netlify
+## Deploy on Heroku
 
-- [ ] After you have created your own version, visit [netlify](https://www.netlify.com/) and link your GitHub account. Once it is linked, use netlify to deploy your version of the site.
+- [ ] command for resetting your heroku migrations.
+      heroku restart -a co-make && npx heroku pg:reset DATABASE --confirm co-make -a co-make && npx heroku run knex migrate:latest -a co-make
 
-heroku restart -a co-make && npx heroku pg:reset DATABASE --confirm co-make -a co-make && npx heroku run knex migrate:latest -a co-make
+## Testing
+
+- [ ] Run the command yarn test
+
+## Documentation of the API
+
+https://documenter.getpostman.com/view/7901618/SVYouzdi?version=latest

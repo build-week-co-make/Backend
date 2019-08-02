@@ -7,6 +7,38 @@ const validateCommentUpvote = require("../middleware/validate-comment-upvote");
 
 const router = express.Router();
 
+router.get("/issues", restricted, (req, res) => {
+  const id = req.params.id;
+  console.log("req.jwtToken", req.jwtToken);
+  Upvotes.findIssueUpvotes()
+    .then(votes => {
+      res.json(votes);
+    })
+    .catch(err => res.send(err));
+});
+//GET upvotes list for issues
+
+router.get("/issue/:id", restricted, (req, res) => {
+  const id = req.params.id;
+  console.log("req.jwtToken", req.jwtToken);
+  Upvotes.issueVoteById(id)
+    .then(votes => {
+      res.json({ votes, upvotes: votes.length });
+    })
+    .catch(err => res.send(err));
+});
+
+//GET upvotes list for issues
+
+router.get("/comment/:id", restricted, (req, res) => {
+  const id = req.params.id;
+  console.log("req.jwtToken", req.jwtToken);
+  Upvotes.commentVoteById(id)
+    .then(votes => {
+      res.json(votes.length);
+    })
+    .catch(err => res.send(err));
+});
 //Post and upvote to an Issue
 
 router.post("/issue", restricted, validateIssueUpvote, async (req, res) => {
@@ -14,6 +46,7 @@ router.post("/issue", restricted, validateIssueUpvote, async (req, res) => {
   const vote = req.body;
   try {
     const upvote = await Upvotes.upvoteIssue(vote);
+    console.log("upvote=", upvote);
     res.status(201).json(upvote);
   } catch (error) {
     console.log(error);
@@ -27,6 +60,8 @@ router.post("/comment", restricted, validateCommentUpvote, async (req, res) => {
   const vote = req.body;
   try {
     const upvote = await Upvotes.upvoteComment(vote);
+    console.log("upvote=", upvote);
+
     res.status(201).json(upvote);
   } catch (error) {
     console.log(error);
